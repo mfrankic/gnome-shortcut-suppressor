@@ -1,0 +1,1 @@
+# GNOME Shortcut Suppressor
