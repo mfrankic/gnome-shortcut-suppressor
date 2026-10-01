@@ -1,0 +1,48 @@
+name: Build
+
+on:
+  push:
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install GNOME tools
+        run: sudo apt-get update && sudo apt-get install -y gjs gnome-shell libglib2.0-bin
+      - name: Test core policy
+        run: gjs -m tests/core.test.js
+      - name: Validate schema
+        run: glib-compile-schemas --strict --dry-run schemas
+      - name: Check JavaScript syntax
+        run: node --check core.js && node --check extension.js && node --check prefs.js
+      - name: Package extension
+        run: gnome-extensions pack --force --extra-source=core.js --extra-source=icon.svg
+
+  release:
+    needs: test
+    if: github.ref_type == 'tag' && startsWith(github.ref_name, 'v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install GNOME tools
+        run: sudo apt-get update && sudo apt-get install -y gnome-shell libglib2.0-bin
+      - name: Package extension
+        run: gnome-extensions pack --force --extra-source=core.js --extra-source=icon.svg
+      - name: Upload release asset
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view "${GITHUB_REF_NAME}" >/dev/null 2>&1 ||
+            gh release create "${GITHUB_REF_NAME}" --generate-notes --verify-tag
+          gh release upload "${GITHUB_REF_NAME}" ./*.shell-extension.zip --clobber

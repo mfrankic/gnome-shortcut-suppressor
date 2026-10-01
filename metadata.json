@@ -1,0 +1,8 @@
+{
+  "uuid": "gnome-shortcut-suppressor@mfrankic",
+  "name": "GNOME Shortcut Suppressor",
+  "description": "Temporarily suppress GNOME shortcuts while matching windows are focused",
+  "url": "https://github.com/mfrankic/gnome-shortcut-suppressor",
+  "settings-schema": "org.gnome.shell.extensions.gnome-shortcut-suppressor",
+  "shell-version": ["50"]
+}

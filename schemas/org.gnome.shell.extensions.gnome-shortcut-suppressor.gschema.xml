@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.gnome-shortcut-suppressor" path="/org/gnome/shell/extensions/gnome-shortcut-suppressor/">
+    <key name="automatic-capture" type="b">
+      <default>true</default>
+      <summary>Suppress shortcuts automatically for matching targets</summary>
+    </key>
+    <key name="capture-mode" type="s">
+      <choices>
+        <choice value="standard"/>
+        <choice value="aggressive"/>
+      </choices>
+      <default>'standard'</default>
+      <summary>Shortcut suppression coverage</summary>
+    </key>
+    <key name="capture-scope" type="s">
+      <choices>
+        <choice value="focused"/>
+        <choice value="fullscreen"/>
+      </choices>
+      <default>'focused'</default>
+      <summary>Suppress shortcuts while a target is focused, or only while it is fullscreen</summary>
+    </key>
+    <key name="capture-runtime-grabs" type="b">
+      <default>false</default>
+      <summary>Suppress active runtime accelerator grabs</summary>
+      <description>Applies only with Extended coverage. All active external grabs are affected because GNOME exposes no owner. Grabs registered after suppression begins wait until the next suppression.</description>
+    </key>
+    <key name="indicator-mode" type="s">
+      <choices>
+        <choice value="off"/>
+        <choice value="active"/>
+        <choice value="always"/>
+      </choices>
+      <default>'active'</default>
+      <summary>Panel indicator visibility</summary>
+    </key>
+    <key name="release-capture" type="as">
+      <default>['&lt;Control&gt;&lt;Alt&gt;Escape']</default>
+      <summary>Restore local shortcuts</summary>
+    </key>
+    <key name="local-exceptions" type="as">
+      <default>[]</default>
+      <summary>Shortcuts that always remain on this computer</summary>
+    </key>
+    <key name="custom-window-rules-json" type="s">
+      <default>'[]'</default>
+      <summary>Custom target-window rules</summary>
+    </key>
+    <key name="capture-wm-shortcuts" type="b">
+      <default>true</default>
+    </key>
+    <key name="capture-shell-shortcuts" type="b">
+      <default>true</default>
+    </key>
+    <key name="capture-mutter-shortcuts" type="b">
+      <default>true</default>
+    </key>
+    <key name="capture-wayland-shortcuts" type="b">
+      <default>true</default>
+    </key>
+    <key name="capture-media-shortcuts" type="b">
+      <default>true</default>
+    </key>
+    <key name="capture-custom-shortcuts" type="b">
+      <default>true</default>
+    </key>
+    <key name="capture-overlay-key" type="b">
+      <default>true</default>
+    </key>
+    <key name="keep-hardware-keys-local" type="b">
+      <default>false</default>
+    </key>
+    <key name="keep-power-keys-local" type="b">
+      <default>true</default>
+    </key>
+    <key name="keep-accessibility-keys-local" type="b">
+      <default>true</default>
+    </key>
+    <key name="keep-screenshot-keys-local" type="b">
+      <default>false</default>
+    </key>
+    <key name="selected-extension-bindings-json" type="s">
+      <default>'[]'</default>
+      <summary>Explicitly selected extension shortcut settings</summary>
+    </key>
+    <key name="debug-logging" type="b">
+      <default>false</default>
+    </key>
+    <key name="recovery-journal-json" type="s">
+      <default>'[]'</default>
+      <summary>Internal crash-recovery journal</summary>
+    </key>
+    <key name="runtime-state-json" type="s">
+      <default>'{}'</default>
+      <summary>Internal runtime diagnostics</summary>
+    </key>
+    <key name="requested-preferences-page" type="s">
+      <choices>
+        <choice value="general"/>
+        <choice value="diagnostics"/>
+      </choices>
+      <default>'general'</default>
+      <summary>Internal preferences navigation request</summary>
+    </key>
+  </schema>
+</schemalist>

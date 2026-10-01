@@ -1,0 +1,45 @@
+name: Bug report
+description: Something broke or behaved unexpectedly
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Include **Diagnostics** from Preferences → Diagnostics →
+        **Copy report** with **Include window titles** turned **off** unless we ask otherwise.
+  - type: input
+    id: shell-version
+    attributes:
+      label: GNOME Shell version
+      placeholder: "50.x"
+    validations:
+      required: true
+  - type: dropdown
+    id: session
+    attributes:
+      label: Session
+      options:
+        - Wayland
+        - X11
+        - Unknown
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: What you did, what you expected, what happened instead
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Diagnostics JSON (titles redacted)
+      description: Paste the copied report from Preferences → Diagnostics
+      render: json
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else
+      description: Extension UUID, capture mode (Standard/Extended), target app (e.g. RustDesk)
